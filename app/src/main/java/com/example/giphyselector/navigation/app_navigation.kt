@@ -44,7 +44,7 @@ fun AppNavigation(
         .diskCache {
             DiskCache.Builder()
                 .maxSizePercent(0.30)
-                .directory(context.cacheDi
+                .directory(context.cacheDir)
                 .build()
         }
         .logger(DebugLogger())
