@@ -1,0 +1,32 @@
+package domain.usecases
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import data.entity.GifEntity
+import domain.GifsMediator
+import domain.repo.GiphyRepository
+
+class GetPagedDataUseCase(
+    private val repository: GiphyRepository,
+) {
+
+    fun execute(
+        query:String
+    ):Pager<Int,GifEntity>{
+       return Pager(
+           config = PagingConfig(
+               pageSize = 20,
+           ),
+           pagingSourceFactory = {
+               if(query.isEmpty()){
+                   repository.getTrendingGifs()
+               }else{
+                   repository.searchGifs(query)
+               }
+           },
+           remoteMediator = GifsMediator(
+               
+           )
+       )
+    }
+
+}
